@@ -53,6 +53,10 @@ public class ComicDTO {
 	
 	private Long viewCount;
 	
+	private Long commented;
+	
+	private Long followed;
+	
     protected Date updatedAt;
     
     private List<ChapterDTO> chapter;

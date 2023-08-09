@@ -20,7 +20,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long>, JpaSpec
 	List<Chapter> findByComicId(@Param("comicId") Long comicId);
 	
 	@Query(value = "select * from chapter c  where c.comic_id = :comicId and c.chap LIKE %:chap% order by chap desc" , nativeQuery = true)
-	List<Chapter> findByChap(@Param("comicId") Long comicId,@Param("chap") Long chap);
+	Chapter findByChap(@Param("comicId") Long comicId,@Param("chap") Long chap);
 
 //	@Query(value = "select * from chapter c  where c.comic_id = :comicId order by chap desc", nativeQuery = true)
 //	Chapter findByChapterId(Long id);

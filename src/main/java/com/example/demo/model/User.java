@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,6 +34,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
 public class User {
 
@@ -42,6 +46,9 @@ public class User {
 	@Column(name="user_name")
 	private String username;
 
+	@Column(name="gmail")
+	private String gmail;
+	
 	private String password;
 
 	@Column(name="full_name")
@@ -53,6 +60,14 @@ public class User {
 	private String phoneNumber;
 
 	private String role;
+	
+    @Column(name = "CREATED_AT", updatable = false)
+    @CreatedDate
+    protected Date createdAt;
+	
+    @Column(name="UPDATED_AT")
+    @LastModifiedDate
+    protected Date updatedAt;
 
 	public User(String username, String password, String fullName, String birthday, String phoneNumber, String role) {
 		super();

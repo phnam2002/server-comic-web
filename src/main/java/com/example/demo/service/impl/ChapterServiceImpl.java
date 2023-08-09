@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -32,6 +29,7 @@ import com.example.demo.model.DTO.ComicDTO;
 import com.example.demo.repository.ChapterRepository;
 import com.example.demo.repository.ComicRepository;
 import com.example.demo.request.ChapterRequest;
+import com.example.demo.request.ComicSearchRequest;
 import com.example.demo.response.ComicResponse;
 import com.example.demo.response.payload.BaseResponse;
 import com.example.demo.service.ChapterService;
@@ -59,6 +57,38 @@ public class ChapterServiceImpl implements ChapterService {
 	public BaseResponse update(Chapter chapter) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+
+	public BaseResponse search1(ChapterDTO chapterSearchRequest, Pageable pageable) {
+		BaseResponse baseResponse = new BaseResponse();
+		baseResponse.setFwError(FwError.THANHCONG); // TODO : Lay tham so xu ly song ngu
+		try {
+			Specification<Chapter> specification = new Specification<Chapter>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public Predicate toPredicate(Root<Chapter> root, CriteriaQuery<?> query,
+						CriteriaBuilder criteriaBuilder) {
+					List<Predicate> predicates = new ArrayList<>();
+					if (!ObjectUtils.isEmpty(chapterSearchRequest.getChap())) {
+						predicates.add(criteriaBuilder.and(criteriaBuilder.equal(criteriaBuilder.upper(root.get("chap")),
+								chapterSearchRequest.getChap()) ));
+					}
+					return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+				}
+			};
+			Page<Chapter> page = chapterRepo.findAll(specification, pageable);
+			baseResponse.setData(page);
+		} catch (Exception e) {
+			System.out.println(e);
+			baseResponse.setFwError(FwError.KHONGTHANHCONG);
+			logger.error("error", e);
+		}
+		return baseResponse;
 	}
 
 	@Override

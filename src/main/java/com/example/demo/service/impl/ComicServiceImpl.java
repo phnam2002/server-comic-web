@@ -66,6 +66,9 @@ public class ComicServiceImpl implements ComicService {
 					.author(comic.getAuthor())
 					.publishedAt(comic.getPublishedAt())
 					.image(comic.getImage())
+					.viewCount(0L)
+					.commented(0L)
+					.followed(0L)
 					.build(); // tiện ích
 			jpaExecute(comicBuilder);
 			baseResponse.setData(comicBuilder);
@@ -204,6 +207,7 @@ public class ComicServiceImpl implements ComicService {
 			comicCur.setType(comic.getType());
 			comicCur.setPublishedAt(comic.getPublishedAt());
 			comicCur.setDescription(comic.getDescription());
+			comicCur.setViewCount(comic.getViewCount());
 			if (comic.getImage() != null) {
 				comicCur.setImage(comic.getImage());
 			}
@@ -285,6 +289,7 @@ public class ComicServiceImpl implements ComicService {
 
 		ComicDTO comicResponse = ComicDTO.builder().id(comic.getId()).status(comic.getStatus()).code(comic.getCode())
 				.name(comic.getName()).description(comic.getDescription()).type(comic.getType())
+				.commented(comic.getCommented()).followed(comic.getFollowed())
 				.viewCount(comic.getViewCount()).author(comic.getAuthor()).publishedAt(comic.getPublishedAt())
 				.image(image).chapter(chapter).build(); // tiện
 														// ích

@@ -1,16 +1,19 @@
 package com.example.demo.model;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -26,15 +29,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@Table(name = "type_comic")
-public class TypeComic {
-
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "user_followed_comic")
+public class FollowedComic {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
 	private Long id;
+
+	@ManyToOne
+	private User user;
 	
-	private String name;
+	@ManyToOne
+	private Comic comic;
 	
-	private String description;
+    @Column(name = "CREATED_AT", updatable = false)
+    @CreatedDate
+    protected Date createdAt;
+	
 }

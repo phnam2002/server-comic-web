@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.common.Constant.FwError;
 import com.example.demo.model.Chapter;
 import com.example.demo.model.Comic;
+import com.example.demo.model.DTO.ChapterDTO;
 import com.example.demo.request.ChapterRequest;
 import com.example.demo.request.ComicSearchRequest;
 import com.example.demo.response.payload.BaseResponse;
@@ -58,11 +59,11 @@ public class ChapterController {
 		return ResponseEntity.ok(baseResponse);
 	}
 
-//	@GetMapping // Tim kiem theo nhieu dieu kien
-//	public ResponseEntity<BaseResponse> searchAll(Chapter chapterSearchRequest, Pageable pageable) { // Tao obj moi obj request khac entity
-//		BaseResponse baseResponse = chaptService.search(chapterSearchRequest, pageable);
-//		return ResponseEntity.ok(baseResponse);
-//	}
+	@GetMapping // Tim kiem theo nhieu dieu kien
+	public ResponseEntity<BaseResponse> searchAll(ChapterDTO chapterSearchRequest, Pageable pageable) { // Tao obj moi obj request khac entity
+		BaseResponse baseResponse = chapServiceImpl.search1(chapterSearchRequest, pageable);
+		return ResponseEntity.ok(baseResponse);
+	}
 	
 	@PostMapping("/add") // Tao moi
 	@ResponseStatus(HttpStatus.CREATED)
