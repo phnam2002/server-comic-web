@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "chapter")
+@Table(name = "chapters")
 public class Chapter {
 
 	@Id

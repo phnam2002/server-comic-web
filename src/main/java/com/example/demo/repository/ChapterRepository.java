@@ -13,13 +13,13 @@ import com.example.demo.model.Comic;
 
 public interface ChapterRepository extends JpaRepository<Chapter, Long>, JpaSpecificationExecutor<Chapter>{
 	
-	@Query(value = "select * from chapter c  where c.comic_id = :comicId order by chap desc LIMIT 3", nativeQuery = true)
+	@Query(value = "select * from chapters c  where c.comic_id = :comicId order by chap desc LIMIT 3", nativeQuery = true)
 	List<Chapter> find3ByComicId(@Param("comicId") Long comicId);
 	
-	@Query(value = "select * from chapter c  where c.comic_id = :comicId order by chap desc", nativeQuery = true)
+	@Query(value = "select * from chapters c  where c.comic_id = :comicId order by chap desc", nativeQuery = true)
 	List<Chapter> findByComicId(@Param("comicId") Long comicId);
 	
-	@Query(value = "select * from chapter c  where c.comic_id = :comicId and c.chap LIKE %:chap% order by chap desc" , nativeQuery = true)
+	@Query(value = "select * from chapters c  where c.comic_id = :comicId and c.chap LIKE %:chap% order by chap desc" , nativeQuery = true)
 	Chapter findByChap(@Param("comicId") Long comicId,@Param("chap") Long chap);
 
 //	@Query(value = "select * from chapter c  where c.comic_id = :comicId order by chap desc", nativeQuery = true)

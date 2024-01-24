@@ -35,7 +35,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "comic")
+@Table(name = "comics")
 public class Comic{
 	
 	@Id

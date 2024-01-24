@@ -13,9 +13,9 @@ import com.example.demo.model.Comic;
 
 @Repository
 public interface ComicRepository extends JpaRepository<Comic, Long>, JpaSpecificationExecutor<Comic>{
-	@Query(value = "select *  from comic c order by view_count desc LIMIT 7", nativeQuery = true)
+	@Query(value = "select *  from comics c order by view_count desc LIMIT 7", nativeQuery = true)
 	List<Comic> searchMostViewComic();
 	
-	@Query(value = "select com.*  from comic com inner join chapter chap on com.id = chap.comic_id order by chap.updated_at desc", nativeQuery = true)
+	@Query(value = "select com.*  from comics com inner join chapters chap on com.id = chap.comic_id order by chap.updated_at desc", nativeQuery = true)
 	List<Comic> orderBYComic();
 }

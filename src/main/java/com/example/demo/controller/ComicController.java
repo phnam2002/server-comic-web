@@ -90,7 +90,7 @@ public class ComicController {
 		return ResponseEntity.ok(baseResponse);
 	}
 
-	@PutMapping // Cap nhat
+	@PutMapping("/update") // Cap nhat
 	public ResponseEntity<BaseResponse> update(@RequestPart("data") @Valid Comic comicRequest,
 			@RequestParam(name = "file", required = false) MultipartFile file) { // Tao obj moi neu obj
 		BaseResponse baseResponse = new BaseResponse();
@@ -107,7 +107,7 @@ public class ComicController {
 		return ResponseEntity.ok(baseResponse);
 	}
 
-	@DeleteMapping("{id}") // Xoa
+	@DeleteMapping("/delete/{id}") // Xoa
 	public ResponseEntity<BaseResponse> delete(@PathVariable long id) { // Tao obj moi neu obj request khac entity
 		BaseResponse baseResponse = cService.delete(id);
 		return ResponseEntity.ok(baseResponse);
